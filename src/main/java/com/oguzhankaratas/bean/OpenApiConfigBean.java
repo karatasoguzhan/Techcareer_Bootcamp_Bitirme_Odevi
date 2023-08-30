@@ -13,12 +13,11 @@ public class OpenApiConfigBean {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .description("blog tanımlama")
+                                .description("Todo API")
                                 .version("v1")
-                                .contact(new Contact().email("oguzhan.krts@hotmail.com").url("url"))
-                                .title("title")
-                                .termsOfService("Software INC")
-                                .license(new License().url("http://www.").name("name")));
+                                .contact(new Contact().email("oguzhan.krts@hotmail.com").url("https://github.com/karatasoguzhan"))
+                                .title("Todo")
+                                .termsOfService("Software INC"));
     }
 }
 
