@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Log4j2
 
@@ -27,32 +29,38 @@ public class TodoItemController implements TodoItemApi {
 
 
     @Override
-    @PostMapping("/create/")
-    public ResponseEntity<?> apiCreate(@Valid @RequestBody CreateTodoItemRequest createTodoItemRequest) {
+    @PostMapping("/create")
+    public ResponseEntity<?> Create(@Valid @RequestBody CreateTodoItemRequest createTodoItemRequest) {
         return ResponseEntity.ok(todoService.create(createTodoItemRequest));
     }
 
     @Override
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<TodoDto>> todoList() {
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.todoList());
+    }
+
+    @Override
     @GetMapping(value = "/find/{id}")
-    public ResponseEntity<?> apiFindById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> FindById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.status(200).body(todoService.todoItemFindById(id));
     }
 
     @Override
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> apiUpdate(@PathVariable(name = "id") Long id,@Valid TodoDto todoDto) {
+    public ResponseEntity<?> Update(@PathVariable(name = "id") Long id,@Valid TodoDto todoDto) {
         return ResponseEntity.ok().body(todoService.update(id,todoDto));
     }
 
     @Override
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> apiDelete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> Delete(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(todoService.delete(id), HttpStatus.OK);
     }
 
     @Override
     @PutMapping("/done/{id}")
-    public ResponseEntity<?> apiDone(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> Done(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok().body(todoService.done(id));
     }
 }

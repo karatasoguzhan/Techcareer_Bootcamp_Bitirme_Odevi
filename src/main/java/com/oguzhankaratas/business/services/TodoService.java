@@ -8,11 +8,15 @@ import com.oguzhankaratas.data.entity.TodoItem;
 import com.oguzhankaratas.data.repository.TodoItemRepository;
 import com.oguzhankaratas.exception.MyCustomException;
 import com.oguzhankaratas.exception.NotFoundException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+@Log4j2
 @Service
 public class TodoService {
 
@@ -38,6 +42,17 @@ public class TodoService {
          throw new MyCustomException("id null olarak geldi");
      }
      return entityToDto(findTodoItem);
+    }
+
+    public List<TodoDto> todoList(){
+        Iterable<TodoItem> iterable = repository.findAll();
+        List<TodoDto> todoDtoList = new ArrayList<>();
+        for (TodoItem item : iterable){
+            TodoDto todoDto =entityToDto(item);
+            todoDtoList.add(todoDto);
+        }
+        log.info("Liste sayısı: " + todoDtoList.size());
+        return todoDtoList;
     }
     @Transactional
     public TodoDto create(CreateTodoItemRequest request) {
