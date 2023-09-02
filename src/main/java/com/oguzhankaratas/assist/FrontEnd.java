@@ -1,5 +1,5 @@
 package com.oguzhankaratas.assist;
 
 public class FrontEnd {
-    public static final String REACT_URL="http://localhost:2525";
+    public static final String REACT_URL="http://localhost:3000";
 }

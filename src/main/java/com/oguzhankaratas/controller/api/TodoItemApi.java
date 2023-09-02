@@ -9,16 +9,16 @@ import java.util.List;
 
 public interface TodoItemApi<D>{
 
-    public ResponseEntity<CreateTodoItemRequest> Create(CreateTodoItemRequest createTodoItemRequest);
+    public ResponseEntity<CreateTodoItemRequest> create(CreateTodoItemRequest createTodoItemRequest);
 
-    public ResponseEntity<List<D>> todoList();
+    public ResponseEntity<List<D>> findAll();
 
-    public ResponseEntity<?> FindById(Long id);
+    public ResponseEntity<?> findById(Long id);
 
-    public ResponseEntity<TodoDto> Update(Long id,TodoDto todoDto);
+    public ResponseEntity<TodoDto> update(Long id,TodoDto todoDto);
 
-    public ResponseEntity<?> Delete(Long id);
+    public ResponseEntity<?> delete(Long id);
 
-    public ResponseEntity<?> Done(Long id);
+    public ResponseEntity<?> done(Long id);
 
 }

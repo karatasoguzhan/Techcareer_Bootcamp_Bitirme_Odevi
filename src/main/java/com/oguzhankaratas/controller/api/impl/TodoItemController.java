@@ -30,37 +30,37 @@ public class TodoItemController implements TodoItemApi {
 
     @Override
     @PostMapping("/create")
-    public ResponseEntity<?> Create(@Valid @RequestBody CreateTodoItemRequest createTodoItemRequest) {
+    public ResponseEntity<?> create(@Valid @RequestBody CreateTodoItemRequest createTodoItemRequest) {
         return ResponseEntity.ok(todoService.create(createTodoItemRequest));
     }
 
     @Override
-    @GetMapping(value = "/list")
-    public ResponseEntity<List<TodoDto>> todoList() {
+    @GetMapping(value = "/findAll")
+    public ResponseEntity<List<TodoDto>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.todoList());
     }
 
     @Override
     @GetMapping(value = "/find/{id}")
-    public ResponseEntity<?> FindById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.status(200).body(todoService.todoItemFindById(id));
     }
 
     @Override
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> Update(@PathVariable(name = "id") Long id,@Valid TodoDto todoDto) {
+    public ResponseEntity<?> update(@PathVariable(name = "id") Long id,@Valid TodoDto todoDto) {
         return ResponseEntity.ok().body(todoService.update(id,todoDto));
     }
 
     @Override
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> Delete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(todoService.delete(id), HttpStatus.OK);
     }
 
     @Override
     @PutMapping("/done/{id}")
-    public ResponseEntity<?> Done(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> done(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok().body(todoService.done(id));
     }
 }
